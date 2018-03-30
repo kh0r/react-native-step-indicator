@@ -46,8 +46,6 @@ export default class StepIndicator extends PureComponent {
 
     this.customStyles = Object.assign(defaultStyles, props.customStyles);
     this.progressAnim = new Animated.Value(0)
-    this.sizeAnim = new Animated.Value(this.customStyles.stepIndicatorSize);
-    this.borderRadiusAnim = new Animated.Value(this.customStyles.stepIndicatorSize/2);
   }
 
   stepPressed(position) {
@@ -184,7 +182,7 @@ export default class StepIndicator extends PureComponent {
     }
 
     renderStep = (position) => {
-      const { currentPosition, stepCount, direction, renderStepIndicator } = this.props;
+      const { currentPosition, stepCount, direction } = this.props;
       let stepStyle;
       let indicatorLabelStyle;
       const separatorStyle = (direction === 'vertical') ? { width: this.customStyles.separatorStrokeWidth, zIndex:10 } : { height: this.customStyles.separatorStrokeWidth }
@@ -194,9 +192,9 @@ export default class StepIndicator extends PureComponent {
             backgroundColor:this.customStyles.stepIndicatorCurrentColor,
             borderWidth:this.customStyles.currentStepStrokeWidth,
             borderColor:this.customStyles.stepStrokeCurrentColor,
-            height:this.sizeAnim,
-            width:this.sizeAnim,
-            borderRadius:this.borderRadiusAnim
+            height:this.customStyles.currentStepIndicatorSize,
+            width:this.customStyles.currentStepIndicatorSize,
+            borderRadius:this.customStyles.currentStepIndicatorSize/2
           };
           indicatorLabelStyle = { fontSize: this.customStyles.currentStepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelCurrentColor };
 
@@ -209,7 +207,7 @@ export default class StepIndicator extends PureComponent {
             borderColor:this.customStyles.stepStrokeFinishedColor,
             height:this.customStyles.stepIndicatorSize,
             width:this.customStyles.stepIndicatorSize,
-            borderRadius:(this.customStyles.stepIndicatorSize) / 2
+            borderRadius:this.customStyles.stepIndicatorSize / 2
           };
           indicatorLabelStyle = { fontSize: this.customStyles.stepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelFinishedColor };
           break;
@@ -260,24 +258,10 @@ export default class StepIndicator extends PureComponent {
         position = stepCount-1;
       }
       const animateToPosition = (this.state.progressBarSize/ (stepCount - 1)) * position;
-      this.sizeAnim.setValue(this.customStyles.stepIndicatorSize);
-      this.borderRadiusAnim.setValue(this.customStyles.stepIndicatorSize/2);
-      Animated.sequence([
-        Animated.timing(
-          this.progressAnim,
-          {toValue: animateToPosition,duration:200}
-        ),
-        Animated.parallel([
-          Animated.timing(
-            this.sizeAnim,
-            {toValue: this.customStyles.currentStepIndicatorSize, duration:100}
-          ),
-          Animated.timing(
-            this.borderRadiusAnim,
-            {toValue: this.customStyles.currentStepIndicatorSize/2, duration:100}
-          )
-        ])
-      ]).start();
+      Animated.timing(
+        this.progressAnim,
+        {toValue: animateToPosition,duration:200}
+      ).start();
     }
 
   }
