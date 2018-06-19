@@ -34,6 +34,7 @@ export default class StepIndicator extends PureComponent {
       stepIndicatorFinishedColor: '#4aae4f',
       stepIndicatorUnFinishedColor: '#a4d4a5',
       stepIndicatorCurrentColor: '#ffffff',
+      stepIndicatorLabelFontFamily: 'system font',
       stepIndicatorLabelFontSize: 15,
       currentStepIndicatorLabelFontSize: 15,
       stepIndicatorLabelCurrentColor: '#000000',
@@ -196,7 +197,7 @@ export default class StepIndicator extends PureComponent {
             width:this.customStyles.currentStepIndicatorSize,
             borderRadius:this.customStyles.currentStepIndicatorSize/2
           };
-          indicatorLabelStyle = { fontSize: this.customStyles.currentStepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelCurrentColor };
+          indicatorLabelStyle = {fontFamily: this.customStyles.stepIndicatorLabelFontFamily, fontSize: this.customStyles.currentStepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelCurrentColor };
 
           break;
         }
@@ -209,7 +210,7 @@ export default class StepIndicator extends PureComponent {
             width:this.customStyles.stepIndicatorSize,
             borderRadius:this.customStyles.stepIndicatorSize / 2
           };
-          indicatorLabelStyle = { fontSize: this.customStyles.stepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelFinishedColor };
+          indicatorLabelStyle = {fontFamily: this.customStyles.stepIndicatorLabelFontFamily, fontSize: this.customStyles.stepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelFinishedColor };
           break;
         }
 
@@ -222,7 +223,7 @@ export default class StepIndicator extends PureComponent {
             width:this.customStyles.stepIndicatorSize,
             borderRadius:(this.customStyles.stepIndicatorSize) / 2
           };
-          indicatorLabelStyle = {overflow: 'hidden', fontSize: this.customStyles.stepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelUnFinishedColor };
+          indicatorLabelStyle = {overflow: 'hidden', fontFamily: this.customStyles.stepIndicatorLabelFontFamily, fontSize: this.customStyles.stepIndicatorLabelFontSize, color: this.customStyles.stepIndicatorLabelUnFinishedColor };
           break;
         }
         default:
